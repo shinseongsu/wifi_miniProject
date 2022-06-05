@@ -29,10 +29,9 @@ public class WifiApiServlet extends HttpServlet {
         WifiService wifiService = new WifiService();
 
         try {
-            wifiService.wifiInfoSave();
+            request.setAttribute("count", wifiService.wifiInfoSave());
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("result", "fail");
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/wifi/wifiResult.jsp");

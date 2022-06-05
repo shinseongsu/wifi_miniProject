@@ -11,6 +11,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("headerVisit", "true");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
         dispatcher.forward(request, response);
     }

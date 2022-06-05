@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TbPublicWifiInfoDto {
 
-    private Long listTotalCount;
+    private Integer listTotalCount;
 
     @SerializedName(value = "RESULT")
     private ResultCode result;

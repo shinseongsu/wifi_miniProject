@@ -4,6 +4,8 @@ import com.example.miniproject.domain.wifi.entity.Wifi;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -60,6 +62,10 @@ public class WifiRow {
                 .latitude(lat)
                 .longitude(lnt)
                 .workDate(workDttm)
+                .createDate(LocalDateTime.now())
+                .createBy("SYSTEM")
+                .updateDate(LocalDateTime.now())
+                .updateBy("SYSTEM")
                 .build();
     }
 
