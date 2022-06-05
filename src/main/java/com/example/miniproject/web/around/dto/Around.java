@@ -14,11 +14,11 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Around {
 
-    private Long id;
+    private Double distance;
     private String mgrNo;
     private String borough;
     private String name;
@@ -35,10 +35,6 @@ public class Around {
     private String latitude;
     private String longitude;
     private String workDate;
-    private LocalDateTime createDate;
-    private String createBy;
-    private LocalDateTime updateDate;
-    private String updateBy;
-    private String distance;
+
 
 }
