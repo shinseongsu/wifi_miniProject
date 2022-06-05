@@ -4,34 +4,42 @@ import com.example.miniproject.config.HibernateManager;
 import com.example.miniproject.domain.wifi.entity.Wifi;
 import com.example.miniproject.web.around.dto.Around;
 import com.example.miniproject.web.around.dto.AroundRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.hibernate.annotations.QueryHints;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WifiRepository {
+
+    public void init() {
+        EntityManager entityManager = HibernateManager.getInstance();
+
+        String sql = "delete from Wifi";
+        entityManager.createQuery(sql).executeUpdate();
+    }
 
     public void save(Wifi wifi) {
         EntityManager entityManager = HibernateManager.getInstance();
         entityManager.persist(wifi);
     }
 
-    public List findByAround(AroundRequest aroundRequest) {
+    public List<Around> findTop20OrderByDistance(AroundRequest aroundRequest) {
         EntityManager entityManager = HibernateManager.getInstance();
 
-        String query = "select w, " +
-                       "(6371*acos(cos(radians(:latitude))*cos(radians(w.latitude))*cos(radians(w.longitude) - radians(:latitude))+sin(radians(:longitude))*sin(radians(w.latitude)))) AS distance " +
-                       " from Wifi w " +
-                       "order by distance desc";
+        String query = "select new com.example.miniproject.web.around.dto.Around( ROUND((6371.0*acos(cos(radians(:latitude))*cos(radians(w.latitude))*cos(radians(w.longitude)-radians(:longitude))+sin(radians(:latitude))*sin(radians(w.latitude)))),2), w.mgrNo, w.borough, w.name, w.address1, w.address2, w.floor, w.installType, w.installationAgency, w.serviceClassification, w.typeOfNet, w.yearOfInstallation, w.doorDivision, w.environment, w.latitude, w.longitude, w.workDate)  " +
+                       "from Wifi w " +
+                       "order by (6371.0*acos(cos(radians(:latitude))*cos(radians(w.latitude))*cos(radians(w.longitude)-radians(:longitude))+sin(radians(:latitude))*sin(radians(w.latitude)))) ";
 
-        Query distanceQuery = entityManager.createQuery(query);
-        distanceQuery.setParameter("latitude", aroundRequest.getLatitude());
-        distanceQuery.setParameter("longitude", aroundRequest.getLongitude());
-
-        distanceQuery.setFirstResult(0);
-        distanceQuery.setMaxResults(20);
-        return distanceQuery.getResultList();
+        return entityManager.createQuery(query, Around.class)
+                        .setParameter("latitude", aroundRequest.getLatitude())
+                        .setParameter("longitude", aroundRequest.getLongitude())
+                        .setFirstResult(0)
+                        .setMaxResults(20)
+                        .setHint(QueryHints.READ_ONLY, true)
+                        .getResultList();
     }
 
 }

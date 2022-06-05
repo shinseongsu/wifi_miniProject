@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "wifi_info")
+@Table(name = "WIFI_INFO")
 public class Wifi {
 
     @Id
