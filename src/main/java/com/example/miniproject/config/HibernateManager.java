@@ -2,7 +2,6 @@ package com.example.miniproject.config;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class HibernateManager {
@@ -27,10 +26,12 @@ public class HibernateManager {
 
     public static void txCommit() {
         getInstance().getTransaction().commit();
+        getInstance().clear();
     }
 
     public static void txRollback() {
         getInstance().getTransaction().rollback();
+        getInstance().clear();
     }
 
 }
