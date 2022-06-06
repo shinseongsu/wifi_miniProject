@@ -1,5 +1,6 @@
 package com.example.miniproject.web.wifi.dto;
 
+import com.example.miniproject.constant.ApiStatus;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,14 @@ public class WifiinfoDto {
 
     public WifiRow[] rows() {
         return this.tbPublicWifiInfo.getRow();
+    }
+
+    public boolean isSuccess() {
+        return ApiStatus.SUCCESS.getCode().equals(this.status());
+    }
+
+    public boolean isFinish(Integer nextPage) {
+        return getTbPublicWifiInfo().getListTotalCount() <= nextPage;
     }
 
 }

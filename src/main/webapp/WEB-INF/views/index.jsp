@@ -57,6 +57,11 @@
     });
 
     around.addEventListener("click", () => {
+        if(!lat.value || !lnt.value) {
+            alert("위치 정보를 가져와 주세요");
+            return;
+        }
+
         fetch("/around", {
             method: "POST",
             headers: {
