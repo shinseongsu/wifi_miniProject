@@ -1,6 +1,7 @@
 package com.example.miniproject.api.wifi;
 
 import com.example.miniproject.api.OkHttpService;
+import com.example.miniproject.api.constant.UrlConstant;
 import com.example.miniproject.api.dto.ApiRequestDto;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -13,11 +14,11 @@ public class WifiOkHttpServiceImpl implements OkHttpService {
     public Response send(ApiRequestDto apiRequestDto) throws Exception {
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        HttpUrl.Builder url = HttpUrl.parse("http://openapi.seoul.go.kr:8088")
+        HttpUrl.Builder url = HttpUrl.parse(UrlConstant.URL.getValue())
                 .newBuilder();
-        url.addPathSegment("756a66554f6c65783638724a427564")
-                .addPathSegment("json")
-                .addPathSegment("TbPublicWifiInfo")
+        url.addPathSegment(UrlConstant.KEY.getValue())
+                .addPathSegment(UrlConstant.TYPE.getValue())
+                .addPathSegment(UrlConstant.DIVISION.getValue())
                 .addPathSegment( apiRequestDto.currentPageToString() )
                 .addPathSegment( apiRequestDto.nextPageToString() );
 
