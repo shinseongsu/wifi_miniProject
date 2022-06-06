@@ -17,6 +17,10 @@ public class HistoryService {
                 .latitude(aroundRequest.getLatitude())
                 .longitude(aroundRequest.getLongitude())
                 .searchDate(LocalDateTime.now())
+                .createDate(LocalDateTime.now())
+                .createBy("SYSTEM")
+                .updateDate(LocalDateTime.now())
+                .updateBy("SYSTEM")
                 .build();
 
         historyRepository.save(history);

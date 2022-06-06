@@ -26,4 +26,13 @@ public class History {
     @Column(name = "search_date")
     private LocalDateTime searchDate;
 
+    @Column(name = "create_date")
+    private LocalDateTime createDate;
+    @Column(name = "create_by")
+    private String createBy;
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
+    @Column(name = "update_by")
+    private String updateBy;
+
 }
