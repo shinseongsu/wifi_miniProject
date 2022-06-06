@@ -29,9 +29,9 @@ public class WifiRepository {
     public List<Around> findTop20OrderByDistance(AroundRequest aroundRequest) {
         EntityManager entityManager = HibernateManager.getInstance();
 
-        String query = "select new com.example.miniproject.web.around.dto.Around( ROUND((6371.0*acos(cos(radians(:latitude))*cos(radians(w.latitude))*cos(radians(w.longitude)-radians(:longitude))+sin(radians(:latitude))*sin(radians(w.latitude)))),2), w.mgrNo, w.borough, w.name, w.address1, w.address2, w.floor, w.installType, w.installationAgency, w.serviceClassification, w.typeOfNet, w.yearOfInstallation, w.doorDivision, w.environment, w.latitude, w.longitude, w.workDate)  " +
+        String query = "select new com.example.miniproject.web.around.dto.Around( ROUND( (6371.0 * acos( cos( radians(:latitude) ) * cos( radians( w.latitude )) * cos( radians( w.longitude ) - radians(:longitude))  + sin( radians(:latitude)) * sin( radians(w.latitude)))),2), w.mgrNo, w.borough, w.name, w.address1, w.address2, w.floor, w.installType, w.installationAgency, w.serviceClassification, w.typeOfNet, w.yearOfInstallation, w.doorDivision, w.environment, w.latitude, w.longitude, w.workDate)  " +
                        "from Wifi w " +
-                       "order by (6371.0*acos(cos(radians(:latitude))*cos(radians(w.latitude))*cos(radians(w.longitude)-radians(:longitude))+sin(radians(:latitude))*sin(radians(w.latitude)))) ";
+                       "order by (6371.0 * acos( cos( radians(:latitude) ) * cos( radians( w.latitude )) * cos( radians( w.longitude ) - radians(:longitude))  + sin( radians(:latitude)) * sin( radians(w.latitude)))) ";
 
         return entityManager.createQuery(query, Around.class)
                         .setParameter("latitude", aroundRequest.getLatitude())

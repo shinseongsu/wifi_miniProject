@@ -8,6 +8,7 @@
         <a class="px-3 py-1 hover:text-cyan-600" href="/">🏠 홈</a>
         <a class="px-3 py-1 hover:text-cyan-600" href="/history">📈 위치 히스토리 목록</a>
         <a class="px-3 py-1 hover:text-cyan-600" href="/wifiRequeest">🤩 Open API 와이파이 정보 가져오기</a>
+        <a class="px-3 py-1 hover:text-cyan-600" href="/wifimap">🌍 Map으로 주변 wifi 보기</a>
     </div>
 
     <div class="flex justify-center align-middle items-center mb-5">
