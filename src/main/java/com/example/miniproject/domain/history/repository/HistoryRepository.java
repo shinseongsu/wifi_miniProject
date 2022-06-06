@@ -20,7 +20,7 @@ public class HistoryRepository {
 
     public List<History> findAll() {
         EntityManager entityManager = HibernateManager.getInstance();
-        return entityManager.createQuery("from History", History.class)
+        return entityManager.createQuery("from History order by id desc", History.class)
                 .setHint(QueryHints.READ_ONLY, true)
                 .getResultList();
     }
